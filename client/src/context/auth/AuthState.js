@@ -41,7 +41,8 @@ const AuthState = props => {
       });
     } catch (err) {
       dispatch({
-        type: AUTH_ERROR
+        type: AUTH_ERROR,
+        payload: err.response.data.msg
       });
     }
   };
@@ -54,9 +55,8 @@ const AuthState = props => {
       }
     };
 
-    //const baseul = 'http://localhost:5000';
     try {
-      const res = await axios.post('api/users', formData, config);
+      const res = await axios.post('/api/users', formData, config);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -78,9 +78,8 @@ const AuthState = props => {
       }
     };
 
-    //const baseul = 'http://localhost:5000';
     try {
-      const res = await axios.post('api/auth', formData, config);
+      const res = await axios.post('/api/auth', formData, config);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
